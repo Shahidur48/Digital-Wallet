@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.digitalAgent</groupId>
-	<artifactId>user-service</artifactId>
+	<artifactId>product-service</artifactId>
 	<version>0.0.3-SNAPSHOT</version>
 	<name>User Service</name>
-	<description>Ostock User Service</description>
+	<description>Ostock Product Service</description>
 
 	<properties>
 		<java.version>11</java.version>
