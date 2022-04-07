@@ -1,4 +1,4 @@
-package com.optimagrowth.product.model.utils;
+package com.optimagrowth.wallet.model.utils;
 
 /**
  * Error message class

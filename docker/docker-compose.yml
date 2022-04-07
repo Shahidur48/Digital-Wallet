@@ -1,13 +1,16 @@
 version: '2.1'
 services:
-  database:
+  database_user:
     image: postgres:latest
     ports:
-      - "5432:5432"
+      - "5635:5635"
+    expose:
+      - "5635"
     environment:
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "postgres"
       POSTGRES_DB: "ostock_user"
+    command: -p 5635
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/1-init.sql
       - ./data.sql:/docker-entrypoint-initdb.d/2-data.sql
@@ -24,17 +27,40 @@ services:
   database_product:
     image: postgres:latest
     ports:
-      - "5433:5433"
+      - "5633:5633"
     expose:
-      - "5433"
+      - "5633"
+    command: -p 5633
     environment:
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "postgres"
       POSTGRES_DB: "ostock_product"
-    command: -p 5433
     volumes:
       - ./init_product.sql:/docker-entrypoint-initdb.d/1-init_product.sql
       - ./data_product.sql:/docker-entrypoint-initdb.d/2-data_product.sql
+    networks:
+      backend:
+        aliases:
+          - "database"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  database_wallet:
+    image: postgres:latest
+    ports:
+      - "5634:5634"
+    expose:
+      - "5634"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "ostock_wallet"
+    command: -p 5634
+    volumes:
+      - ./init_wallet.sql:/docker-entrypoint-initdb.d/1-init_wallet.sql
+      - ./data_wallet.sql:/docker-entrypoint-initdb.d/2-data_wallet.sql
     networks:
       backend:
         aliases:
@@ -153,6 +179,21 @@ services:
         condition: service_healthy
     ports:
       - "8091:8091"
+    networks:
+      - backend
+  walletservice:
+    image: ostock/wallet-service:0.0.3-SNAPSHOT
+    environment:
+      PROFILE: "dev"
+      CONFIGSERVER_URI: "http://configserver:8071"
+      CONFIGSERVER_PORT:   "8071"
+      SERVER_PORT: "8092"
+      ENCRYPT_KEY:       "IMSYMMETRIC"
+    depends_on:
+      configserver:
+        condition: service_healthy
+    ports:
+      - "8092:8092"
     networks:
       - backend
 

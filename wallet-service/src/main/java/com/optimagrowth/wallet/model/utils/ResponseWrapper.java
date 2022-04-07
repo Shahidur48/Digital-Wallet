@@ -1,4 +1,4 @@
-package com.optimagrowth.product.model.utils;
+package com.optimagrowth.wallet.model.utils;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 

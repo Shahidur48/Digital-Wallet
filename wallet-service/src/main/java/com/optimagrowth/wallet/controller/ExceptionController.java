@@ -1,11 +1,11 @@
 /**
  * 
  */
-package com.optimagrowth.product.controller;
+package com.optimagrowth.wallet.controller;
 
-import com.optimagrowth.product.model.utils.ErrorMessage;
-import com.optimagrowth.product.model.utils.ResponseWrapper;
-import com.optimagrowth.product.model.utils.RestErrorList;
+import com.optimagrowth.wallet.model.utils.ErrorMessage;
+import com.optimagrowth.wallet.model.utils.ResponseWrapper;
+import com.optimagrowth.wallet.model.utils.RestErrorList;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

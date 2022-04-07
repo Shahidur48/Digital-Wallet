@@ -1,4 +1,4 @@
-package com.optimagrowth.product.service.client;
+package com.optimagrowth.wallet.service.client;
 
 
 import org.springframework.cloud.openfeign.FeignClient;

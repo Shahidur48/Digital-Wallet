@@ -1,4 +1,4 @@
-package com.optimagrowth.product.utils;
+package com.optimagrowth.wallet.utils;
 
 import java.io.IOException;
 

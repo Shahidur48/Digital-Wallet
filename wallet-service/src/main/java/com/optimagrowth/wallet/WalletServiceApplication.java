@@ -3,7 +3,7 @@ package com.optimagrowth.wallet;
 import java.util.Collections;
 import java.util.List;
 
-import com.optimagrowth.product.utils.UserContextInterceptor;
+import com.optimagrowth.wallet.utils.UserContextInterceptor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -20,10 +20,10 @@ import org.springframework.web.client.RestTemplate;
 @EnableDiscoveryClient
 @EnableFeignClients
 @EnableEurekaClient
-public class ProductServiceApplication {
+public class WalletServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ProductServiceApplication.class, args);
+		SpringApplication.run(WalletServiceApplication.class, args);
 	}
 
 	@LoadBalanced

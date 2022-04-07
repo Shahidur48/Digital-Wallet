@@ -11,7 +11,7 @@
 	<groupId>com.digitalAgent</groupId>
 	<artifactId>wallet-service</artifactId>
 	<version>0.0.3-SNAPSHOT</version>
-	<name>User Service</name>
+	<name>Wallet Service</name>
 	<description>Ostock Wallet Service</description>
 
 	<properties>
