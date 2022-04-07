@@ -1,4 +1,4 @@
-package com.optimagrowth.product;
+package com.optimagrowth.wallet;
 
 import java.util.Collections;
 import java.util.List;

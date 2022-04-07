@@ -20,6 +20,30 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+
+  database_product:
+    image: postgres:latest
+    ports:
+      - "5433:5433"
+    expose:
+      - "5433"
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "ostock_product"
+    command: -p 5433
+    volumes:
+      - ./init_product.sql:/docker-entrypoint-initdb.d/1-init_product.sql
+      - ./data_product.sql:/docker-entrypoint-initdb.d/2-data_product.sql
+    networks:
+      backend:
+        aliases:
+          - "database"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
   configserver:
     image: ostock/configserver:0.0.1-SNAPSHOT
     ports:
@@ -116,6 +140,22 @@ services:
       - "8090:8090"
     networks:
       - backend
+  productservice:
+    image: ostock/product-service:0.0.3-SNAPSHOT
+    environment:
+      PROFILE: "dev"
+      CONFIGSERVER_URI: "http://configserver:8071"
+      CONFIGSERVER_PORT:   "8071"
+      SERVER_PORT: "8091"
+      ENCRYPT_KEY:       "IMSYMMETRIC"
+    depends_on:
+      configserver:
+        condition: service_healthy
+    ports:
+      - "8091:8091"
+    networks:
+      - backend
+
 
 networks:
   backend:

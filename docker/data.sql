@@ -8,3 +8,9 @@ INSERT INTO public.roles VALUES (10, 'ADMIN', 'Control');
 INSERT INTO public.roles VALUES (20, 'HR', 'Manage');
 INSERT INTO public.users VALUES (1, 'Agm', 'Islam', 10, '11/12/1985','2542223122','agm.islam@gmail.com');
 INSERT INTO public.users VALUES (2, 'Md', 'Rahaman', 20, '11/12/1995','254220000','sr.himel@gmail.com');
+
+INSERT INTO public.categories VALUES (1, 'SME', 'sme finance');
+INSERT INTO public.categories VALUES (2, 'Microfinance', 'Microfinance Desc');
+INSERT INTO public.products VALUES (1, 'product_1', 'product1_desc', 1, 'Open');
+INSERT INTO public.products VALUES (2, 'product_2', 'product2_desc', 2, 'Open');
+INSERT INTO public.product_rate VALUES (1, 5, 100, 1, 3, 30, 10);

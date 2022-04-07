@@ -28,6 +28,7 @@
     <module>organization-service</module>
     <module>user-service</module>
     <module>product-service</module>
+    <module>wallet-service</module>
   </modules>
   <build>
     <plugins>
