@@ -1,5 +1,6 @@
-package com.optimagrowth.license.service.client;
+package com.optimagrowth.wallet.service.client;
 
+import com.optimagrowth.wallet.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -9,16 +10,16 @@ import org.springframework.web.client.RestTemplate;
 
 
 @Component
-public class OrganizationRestTemplateClient {
+public class UserRestTemplateClient {
     @Autowired
     RestTemplate restTemplate;
 
-    public String getOrganization(){
-        ResponseEntity<String> restExchange =
+    public User IsUser(Long userId){
+        ResponseEntity<User> restExchange =
                 restTemplate.exchange(
-                        "http://organization-service//org/orgservice",
+                        "http://user-service/users/{userId}",
                         HttpMethod.GET,
-                        null, String.class);
+                        null, User.class, userId);
 
         return restExchange.getBody();
     }

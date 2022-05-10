@@ -24,8 +24,8 @@
     <module>configserver</module>
     <module>eurekaserver</module>
     <module>gatewayserver</module>
-    <module>licensing-service</module>
-    <module>organization-service</module>
+<!--    <module>licensing-service</module>-->
+<!--    <module>organization-service</module>-->
     <module>user-service</module>
     <module>product-service</module>
     <module>wallet-service</module>

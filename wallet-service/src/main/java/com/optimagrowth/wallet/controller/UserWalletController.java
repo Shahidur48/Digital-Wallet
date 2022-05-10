@@ -27,4 +27,11 @@ public class UserWalletController {
     public UserWallet userWalletById(@PathVariable("id") Long id) {
         return userWalletService.userWalletById(id);
     }
+
+    @GetMapping("/deductBalance/{userId}/{walletId}/{amount}")
+    public String deductBalance(@PathVariable("userId") Long userId,
+                                    @PathVariable("walletId") Long walletId,
+                                    @PathVariable("amount") Long amount) {
+        return userWalletService.deductBalance(userId,walletId, amount);
+    }
 }

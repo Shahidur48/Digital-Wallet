@@ -15,21 +15,26 @@ spring:
   cloud:
     loadbalancer.ribbon.enabled: false
     gateway:
-        routes:
-        - id: organization-service
-          uri: lb://organization-service
+      routes:
+        - id: wallet-service
+          uri: lb://wallet-service
           predicates:
-          - Path=/api/rahaman/service2/**
+            - Path=/wallet/**
           filters:
-          - RewritePath=/api/rahaman/service2/(?<path>.*), /$\{path}
-        - id: licensing-service
-          uri: lb://licensing-service
+            - RewritePath=/wallet/(?<path>.*), /$\{path}
+        - id: product-service
+          uri: lb://product-service
           predicates:
-          - Path=/api/rahaman/service1/**
+            - Path=/product/**
           filters:
-          - RewritePath=/api/rahaman/service1/(?<path>.*), /$\{path}
-          - SetResponseHeader= assignment9, rahaman
-       
+            - RewritePath=/product/(?<path>.*), /$\{path}
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/user/**
+          filters:
+            - RewritePath=/user/(?<path>.*), /$\{path}
+
 management:
   endpoints:
     web:

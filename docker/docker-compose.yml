@@ -3,14 +3,14 @@ services:
   database_user:
     image: postgres:latest
     ports:
-      - "5635:5635"
+      - "5570:5570"
     expose:
-      - "5635"
+      - "5570"
     environment:
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "postgres"
       POSTGRES_DB: "ostock_user"
-    command: -p 5635
+    command: -p 5570
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/1-init.sql
       - ./data.sql:/docker-entrypoint-initdb.d/2-data.sql
@@ -27,10 +27,10 @@ services:
   database_product:
     image: postgres:latest
     ports:
-      - "5633:5633"
+      - "5571:5571"
     expose:
-      - "5633"
-    command: -p 5633
+      - "5571"
+    command: -p 5571
     environment:
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "postgres"
@@ -50,14 +50,14 @@ services:
   database_wallet:
     image: postgres:latest
     ports:
-      - "5634:5634"
+      - "5572:5572"
     expose:
-      - "5634"
+      - "5572"
     environment:
       POSTGRES_USER: "postgres"
       POSTGRES_PASSWORD: "postgres"
       POSTGRES_DB: "ostock_wallet"
-    command: -p 5634
+    command: -p 5572
     volumes:
       - ./init_wallet.sql:/docker-entrypoint-initdb.d/1-init_wallet.sql
       - ./data_wallet.sql:/docker-entrypoint-initdb.d/2-data_wallet.sql
@@ -65,11 +65,11 @@ services:
       backend:
         aliases:
           - "database"
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+#    healthcheck:
+#      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+#      interval: 10s
+#      timeout: 5s
+#      retries: 5
   configserver:
     image: ostock/configserver:0.0.1-SNAPSHOT
     ports:
@@ -101,56 +101,26 @@ services:
       backend:
         aliases:
           - "eurekaserver"
-#  gatewayserver:
-#    image: ostock/gatewayserver:0.0.1-SNAPSHOT
-#    ports:
-#      - "8072:8072"
-#    environment:
-#      PROFILE: "default"
-#      SERVER_PORT: "8072"
-#      CONFIGSERVER_URI: "http://configserver:8071"
-#      EUREKASERVER_URI: "http://eurekaserver:8070/eureka/"
-#      EUREKASERVER_PORT: "8070"
-#      CONFIGSERVER_PORT: "8071"
-#    depends_on:
-#      configserver:
-#        condition: service_healthy
-#      eurekaserver:
-#        condition: service_healthy
-#    networks:
-#      backend:
-#        aliases:
-#          - "gateway"
-#  licensingservice:
-#    image: ostock/licensing-service:0.0.3-SNAPSHOT
-#    environment:
-#      PROFILE: "dev"
-#      CONFIGSERVER_URI: "http://configserver:8071"
-#      CONFIGSERVER_PORT:   "8071"
-#      ENCRYPT_KEY:       "IMSYMMETRIC"
-#      SERVER_PORT: "8084"
-#    depends_on:
-#      configserver:
-#        condition: service_healthy
-#    ports:
-#      - "8084:8084"
-#    networks:
-#      - backend
-#  organizationservice:
-#    image: ostock/organization-service:0.0.1-SNAPSHOT
-#    environment:
-#      PROFILE: "dev"
-#      CONFIGSERVER_URI: "http://configserver:8071"
-#      CONFIGSERVER_PORT:   "8071"
-#      SERVER_PORT: "8089"
-#      ENCRYPT_KEY:       "IMSYMMETRIC"
-#    depends_on:
-#      configserver:
-#        condition: service_healthy
-#    ports:
-#      - "8089:8089"
-#    networks:
-#      - backend
+  gatewayserver:
+    image: ostock/gatewayserver:0.0.1-SNAPSHOT
+    ports:
+      - "8072:8072"
+    environment:
+      PROFILE: "default"
+      SERVER_PORT: "8072"
+      CONFIGSERVER_URI: "http://configserver:8071"
+      EUREKASERVER_URI: "http://eurekaserver:8070/eureka/"
+      EUREKASERVER_PORT: "8070"
+      CONFIGSERVER_PORT: "8071"
+    depends_on:
+      configserver:
+        condition: service_healthy
+      eurekaserver:
+        condition: service_healthy
+    networks:
+      backend:
+        aliases:
+          - "gateway"
   userservice:
     image: ostock/user-service:0.0.3-SNAPSHOT
     environment:

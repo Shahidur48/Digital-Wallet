@@ -27,4 +27,8 @@ public class UserController {
     public User userById(@PathVariable("id") Long id) {
         return userService.userById(id);
     }
+//    @GetMapping("verifyUser/{id}")
+//    public Boolean IsUser(@PathVariable("id") Long id) {
+//        return userService.IsUser(id);
+//    }
 }

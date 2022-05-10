@@ -29,4 +29,13 @@ public class UserService {
         }
         return null;
     }
+//    public Boolean IsUser(@PathVariable("id") Long id) {
+//        Optional<User> optionalUser = userRepository.findById(id);
+//        if (optionalUser.isPresent()) {
+//            if(optionalUser.isPresent()){
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
 }
